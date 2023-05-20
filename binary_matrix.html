@@ -1,0 +1,85 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Binary Matrix Screen</title>
+	</head>
+	
+	<body>
+		<canvas width="1500" height="1300" id="canvas"/>
+		
+		<script>
+			const canvas = document.getElementById('canvas');
+			const ctx = canvas.getContext("2d");
+			const width = canvas.width = document.body.offsetWidth;
+			const height = canvas.height = document.body.offsetHeight;
+
+			ctx.fillStyle = '#000';
+			ctx.fillRect(0, 0, width, height);
+
+			const cols = Math.floor(width/20) + 1;
+			const yPos = Array(cols).fill(0);
+
+			function matrix(){
+				ctx.fillStyle = '#0001';
+				ctx.fillRect(0, 0, width, height);
+				ctx.fillStyle = '#0f0';
+				ctx.font = '15pt monospace';
+				
+				yPos.forEach((y, ind)=>{
+					let rand = Math.random() < 0.5 ? 0:1;
+					const x = ind*20;
+					ctx.fillText(rand, x, y);
+					if(y>100 + Math.random()*10000) yPos[ind] = 0;
+					else yPos[ind] = y + 20;
+				});
+			}
+			setInterval(matrix, 50);
+		</script>
+	</body>
+</html>
+
+<!--
+
+------old code-------
+----for reference----
+
+<!doctype html>
+<html>
+	<head>
+		<title>Binary Matrix Screen</title>
+	</head>
+	
+	<body>
+		<div class="output"></div>
+		
+		<script>
+			const canvas = document.createElement("canvas");
+			const ctx = canvas.getContext("2d");
+			canvas.setAttribute("width", "1500");
+			canvas.setAttribute("height", "1300");
+			document.body.prepend(canvas);
+			const colVal = [];
+			for(let x = 0; x<150; x++){
+				colVal.push(0);
+			}
+			
+			function matrix(){
+				ctx.fillStyle = "rgba(0, 0, 0, .05)";
+				ctx.fillRect(0, 0, canvas.width, canvas.height);
+				ctx.fillStyle = "green";
+				colVal.map((posY, index) => {
+					let output = Math.random() < 0.5 ? 0:1;
+					let posX = (index* 10)+10;
+					ctx.fillText(output, posX, posY);
+					if(posY > 950 + Math.random() * 1300){
+						colVal[index] = 0;
+					}else{
+						colVal[index] = posY + 10;
+					}
+				});
+			}
+			setInterval(matrix, 50);
+			//setInterval(matrix, 60);
+		</script>
+	</body>
+</html>-->
